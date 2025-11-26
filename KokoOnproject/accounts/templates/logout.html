@@ -1,7 +1,7 @@
 <!-- ベーステンプレートを適用する -->
 {% extends 'base.html' %}
 <!-- ヘッダー情報のページタイトルを設定する -->
-{% block title %}Registration Complete{% endblock %}
+{% block title %}Log out{% endblock %}
 
       {% block contents %}
       <!-- Bootstrapのグリッドシステム -->
@@ -11,10 +11,8 @@
           <!-- 列の左右に余白offset-4を入れる
                列の上下パディングはpy-4 -->
           <div class="col offset-4 py-4">
-            <h3>登録が完了しました</h3>
-            <!-- ログインページのリンクテキスト -->
-            <p><a href="{% url 'accounts:login' %}">ログインはこちら</a><p>
-          </dv>
-        </dv>
-      </dv>
+
+          <h3>ログアウトしました</h3>
+          <!-- トップページのリンクテキスト -->
+          <p><a href="{% url 'KokoOn:index' %}">トップページへ</a><p>
       {% endblock %}
