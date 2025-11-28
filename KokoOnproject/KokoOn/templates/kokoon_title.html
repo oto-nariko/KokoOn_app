@@ -10,7 +10,7 @@
 
         {% if user.is_authenticated %}
           <!-- ログイン中のボタン -->
-          <a href="#"
+          <a href="{% url 'KokoOn:post' %}"
             class="btn btn-primary my-2">投稿する</a>
 
           <a href="{% url 'accounts:logout' %}"
