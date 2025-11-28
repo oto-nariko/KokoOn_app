@@ -1,7 +1,7 @@
 <!-- ベーステンプレートを適用する-->
 {% extends 'base.html' %}
 <!-- ヘッダー情報のページタイトルを設定する-->
-{% block title %}Photo Detail{% endblock %}
+{% block title %}KokoOn Detail{% endblock %}
 
     {% block contents %}
     <!-- Bootstrapのグリッドシステム-->
@@ -13,23 +13,13 @@
           <div class="col offset-3">
             <!-- タイトル -->
             <h2>{{object.title}}</h2>
-            <!-- コメント -->
+            <!-- 心音 -->
             <p>{{object.comment}}</p>
             <br>
             <!-- 投稿日時 -->
             <p>{{object.posted_at}}に投稿</p>
-            <!-- 1枚目の写真 -->
-            <p><img src="{{ object.image1.url }}"></img></p>
-            <!-- 2枚目の写真が投稿されていたら表示する-->
-            {% if object.image2 %}
-              <p><img src="{{ object.image2.url }}"></img></p>
-            {% endif %}
 
-            {% if request.user == object.user %}
-            <form method="POST">
-            <a href="{% url 'photo:photo_delete' object.pk %}"
-              class="btn btn-primary my-2">削除する</a>
-            {% endif %}
+
             
           </div>
         </div>

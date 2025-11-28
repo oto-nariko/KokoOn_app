@@ -6,6 +6,7 @@ from .forms import MoodPostForm
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from .models import MoodPost
+from django.views.generic import DetailView
 
 
 class IndexView(ListView):
@@ -56,3 +57,6 @@ class UserView(ListView):
             user=user_id).order_by('-posted_at')
         return user_list
     
+class DetailView(DetailView):
+    template_name = 'detail.html'
+    model = MoodPost

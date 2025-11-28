@@ -15,4 +15,7 @@ urlpatterns = [
     path('user-list/<int:user>',
          views.UserView.as_view(),
          name = 'user_list'),
+     path('mood-dital/<int:pk>',
+          views.DetailView.as_view(),
+          name = 'mood_detail'),
 ]

@@ -26,7 +26,8 @@
                 <div class="btn-group">
                   <!--詳細ページを表示するボタン-->
                   <button type="button"
-                          class="btn btn-sm btn-outline-secondary">
+                          class="btn btn-sm btn-outline-secondary"
+                          onclick="location.href='{% url 'KokoOn:mood_detail' record.pk %}'">
                           View</button>
                   <!--カテゴリを表示するボタン-->
                   <button type="button"
