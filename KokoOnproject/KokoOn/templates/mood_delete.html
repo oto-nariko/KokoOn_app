@@ -1,7 +1,7 @@
 <!-- ベーステンプレートを適用する -->
 {% extends 'base.html' %}
 <!-- ヘッダー情報のページタイトルを設定する -->
-{% block title %}Photo Detail{% endblock %}
+{% block title %}KokoOn Detail{% endblock %}
 
       {% block contents %}
       <!-- Bootstrapのグリッドシステム -->
@@ -17,7 +17,7 @@
               {% csrf_token %}
               <button class="btn btn-primary my-2"
                       type="submit">削除</button>
-              <a href="{% url 'photo:photo_detail' object.pk %}"
+              <a href="{% url 'KokoOn:mood_detail' object.pk %}"
                  class="btn btn-secondary my-2">キャンセル</a>
           </dv>
         </dv>

@@ -19,7 +19,11 @@
             <!-- 投稿日時 -->
             <p>{{object.posted_at}}に投稿</p>
 
-
+            {% if request.user == object.user %}
+            <form method="POST">
+            <a href="{% url 'KokoOn:mood_delete' object.pk %}"
+              class="btn btn-primary my-2">消去する</a>
+            {% endif %}
             
           </div>
         </div>

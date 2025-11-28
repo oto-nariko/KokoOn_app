@@ -18,4 +18,8 @@ urlpatterns = [
      path('mood-dital/<int:pk>',
           views.DetailView.as_view(),
           name = 'mood_detail'),
+     path('mypage/', views.MypageView.as_view(), name = 'mypage'),
+     path('mood/<int:pk>/delete/',
+          views.MoodDeleteView.as_view(),
+          name = 'mood_delete'),
 ]

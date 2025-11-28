@@ -33,6 +33,7 @@
           font-size: 3.5rem;
         }
       }
+
     </style>
 
     
@@ -44,12 +45,9 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-md-7 py-4">
-          <h4 class="text-white">お気に入りを見つけよう！</h4>
+          <h4 class="text-white">あなたの悩みに「響く音楽」を。</h4>
           <p class="text-muted">
-            誰でも参加できる写真投稿サイトです。
-            自分で撮影した写真なら何でもオッケー！
-            でも、カテゴリに属する写真に限ります。
-            コメントも付けてください！
+            あなたの境遇を投稿すると、共感したソムリエがぴったりな曲を見つけてくれるかも？
           </p>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
@@ -84,8 +82,7 @@
   </div>
   <div class="navbar navbar-dark bg-dark shadow-sm">
     <div class="container">
-      <a href="" class="navbar-brand d-flex align-items-center">
-
+      <a href="{% url 'KokoOn:index' %}" class="navbar-brand d-flex align-items-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
         <strong>KokoOn -心音-</strong>
       </a>
@@ -103,7 +100,7 @@
 <footer class="text-muted py-5">
   <div class="container">
     <p class="float-end mb-1">
-      <a href="#">Back to top</a>
+      <a href="{% url 'KokoOn:index' %}">Back to top</a>
     </p>
     <p class="mb-1">KokoOn is &copy; Bootstrap, but please post a lot!</p>
     <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="../getting-started/introduction/">getting started guide</a>.</p>

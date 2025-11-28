@@ -7,6 +7,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from .models import MoodPost
 from django.views.generic import DetailView
+from django.views.generic import DeleteView
 
 
 class IndexView(ListView):
@@ -60,3 +61,20 @@ class UserView(ListView):
 class DetailView(DetailView):
     template_name = 'detail.html'
     model = MoodPost
+
+class MypageView(ListView):
+    template_name = 'mypage.html'
+    paginate_by = 9
+
+    def get_queryset(self):
+        queryset = MoodPost.objects.filter(   
+        user=self.request.user).order_by('-posted_at')
+        return queryset
+    
+class MoodDeleteView(DeleteView):
+    model = MoodPost
+    template_name = 'mood_delete.html'
+    success_url = reverse_lazy('KokoOn:mypage')
+
+    def delete(self, request, *args, **kwargs):
+        return super().delete(request, *args, **kwargs)
