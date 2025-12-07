@@ -4,18 +4,8 @@
         {% for record in object_list %}
         <div class="col">
           <div class="card shadow-sm">
-            {% comment %} <img src="{{ record.image1.url }}"
-                 class="bd-placeholder-img card-img-top"
-                 width="100%" height="225"
-                 xmlns="http://www.w3.org/2000/svg"
-                 role="img" aria-label="Placeholder: Thumbnail"
-                 preserveAspectRatio="xMidYMid slice"
-                 focusable="false">
-                 <title>Placeholder</title>
-                 <rect width="100%" height="100%" fill="#55595c"/>
-            </img> {% endcomment %}
-          <!--タイトルとボタンを出力するブロック-->
-            <div class="card-body">
+            
+            {% comment %} <div class="card-body">
               <p class="card-text">
                 {{record.title}}
               </p>
@@ -41,9 +31,35 @@
                   {{record.user.username}}</small>
                 </a>
               </div>
-              </div>
+              </div> {% endcomment %}
+              
+            <div class="user-header">
+                <img src="https://via.placeholder.com/40" alt="Avatar" class="post-avatar me-2">
+                <div class="user-details">
+                    <a href="{% url 'KokoOn:user_list' user=record.user.id %}" class="username-link">
+                        <strong>{{record.user.username}}</strong>
+                    </a>
+                    <small class="text-muted d-block">{{ record.category.title }}</small>
+                </div>
             </div>
 
+            <div class="card-body post-content-area">
+                <h5 class="card-title">{{record.title}}</h5>
+                <p class="card-text">
+                    {{record.comment|truncatechars:100}} </p>
+            </div>
+
+            <div class="card-footer post-actions">
+                <div class="d-flex justify-content-between align-items-center">
+                    <button type="button"
+                            class="btn btn-sm btn-primary"
+                            onclick="location.href='{% url 'KokoOn:mood_detail' record.pk %}'">
+                            詳細を見る</button>
+                    <span class="badge bg-secondary">{{record.category.title}}</span>
+                </div>
+            </div>
+
+          </div>
         </div>
         {% endfor %}
       </div>

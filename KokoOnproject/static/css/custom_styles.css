@@ -1,0 +1,108 @@
+/* 1. 全体設定の調整 */
+body {
+    background-color: #f0f2f5; /* SNSによくあるライトグレーの背景 */
+}
+
+/* 2. 投稿カードのスタイル調整 */
+.post-card-custom {
+    border: none; /* デフォルトの枠線を消す */
+    border-radius: 12px; /* 角を丸くしてモダンな印象に */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* 影を強調 */
+    transition: transform 0.2s; /* ホバー時のアニメーション */
+}
+
+.post-card-custom:hover {
+    transform: translateY(-2px); /* 少し浮き上がらせる */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 3. ユーザーヘッダー（アバターと名前）のスタイル */
+.user-header {
+    display: flex;
+    align-items: center;
+    padding: 15px 15px 0 15px; /* 上部にスペース */
+}
+
+.post-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%; /* アバターを完全に円形に */
+    border: 2px solid #5cb85c; /* KokoOnのテーマカラーの縁取り */
+    object-fit: cover;
+}
+
+.username-link {
+    text-decoration: none; /* リンクの下線を消す */
+    color: #1c1e21;
+}
+
+.username-link:hover {
+    color: #0d6efd; /* ホバーで青くする */
+}
+
+/* 4. 投稿内容エリア */
+.post-content-area {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* 5. フッター（アクション） */
+.post-actions {
+    background-color: #fcfcfc;
+    border-top: 1px solid #eee;
+    padding: 10px 15px;
+}
+
+/* 6. タイトルセクションの背景色 */
+.container-fluid {
+    /* base.htmlのメインコンテンツに適用する背景色 */
+    background-color: #ffffff; 
+}
+
+
+
+
+
+/* YouTube プレビューエリアのスタイル */
+.youtube-preview {
+    position: relative; /* 子要素の配置基準にする */
+    max-width: 480px;  /* プレビューの最大幅 */
+    margin-top: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 8px; /* 角丸 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 影で立体感を出す */
+}
+
+.youtube-thumbnail {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* 再生アイコンをサムネイルの中央に配置 */
+.play-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5em;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6); /* 透明度のある黒の背景 */
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    line-height: 80px; /* 垂直方向の中央揃え */
+    text-align: center;
+    pointer-events: none; /* クリックイベントを透過させる */
+    transition: background-color 0.2s;
+}
+
+.youtube-preview:hover .play-overlay {
+    background-color: rgba(255, 0, 0, 0.8); /* ホバーでYouTubeカラーに変化 */
+}
+
+/* 埋め込みプレイヤーのiframeにも角丸を適用 */
+.youtube-preview iframe {
+    border-radius: 8px;
+}
