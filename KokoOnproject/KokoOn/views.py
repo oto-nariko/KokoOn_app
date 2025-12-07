@@ -1,13 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 from django.urls import reverse_lazy
 from .forms import MoodPostForm
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from .models import MoodPost
+from .models import MoodPost, Comment
 from django.views.generic import DetailView
 from django.views.generic import DeleteView
+from .forms import CommentForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class IndexView(ListView):
@@ -58,9 +60,6 @@ class UserView(ListView):
             user=user_id).order_by('-posted_at')
         return user_list
     
-class DetailView(DetailView):
-    template_name = 'detail.html'
-    model = MoodPost
 
 class MypageView(ListView):
     template_name = 'mypage.html'
@@ -78,3 +77,46 @@ class MoodDeleteView(DeleteView):
 
     def delete(self, request, *args, **kwargs):
         return super().delete(request, *args, **kwargs)
+    
+class MoodDetailView(DetailView):
+    model = MoodPost
+    template_name = 'detail.html'
+    
+    # GETリクエスト（ページ表示）とPOSTリクエスト（フォーム送信）の両方を処理する
+    def get_context_data(self, **kwargs):
+        # ページを表示する際のコンテキスト（変数のセット）を作成
+        context = super().get_context_data(**kwargs)
+        # コメントフォームをコンテキストに追加
+        context['comment_form'] = CommentForm()
+        # 投稿に紐づくコメントを最新のものから取得してコンテキストに追加
+        # related_name='comments_for_post' を使ってコメントを取得
+        context['comments'] = self.object.comments_for_post.all().order_by('-posted_at')
+        return context
+
+    # POSTリクエスト（フォーム送信時）の処理
+    def post(self, request, *args, **kwargs):
+        # ログインしていない場合はログインページへ
+        if not request.user.is_authenticated:
+            return redirect('accounts:login')
+        
+        self.object = self.get_object() # 現在の投稿（MoodPost）を取得
+        comment_form = CommentForm(request.POST) # 送信されたデータをフォームに入れる
+
+        if comment_form.is_valid():
+            # フォームのインスタンスをまだ保存しない（commit=False）
+            comment = comment_form.save(commit=False)
+            
+            # 必須項目（userとmood）を手動でセットする
+            comment.user = request.user # ログイン中のユーザー
+            comment.mood = self.object  # 現在の投稿
+            
+            # save()を実行すると、models.pyで定義した youtube_id 抽出ロジックが実行されます
+            comment.save()
+            
+            # 処理後に詳細ページにリダイレクトする（リロードと同じ）
+            return redirect('KokoOn:mood_detail', pk=self.object.pk)
+        
+        # フォームが無効だった場合、元のページとエラー情報でレンダリングし直す
+        context = self.get_context_data(**kwargs)
+        context['comment_form'] = comment_form # エラー情報を持ったフォーム
+        return self.render_to_response(context)

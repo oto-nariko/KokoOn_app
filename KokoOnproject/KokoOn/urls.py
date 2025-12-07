@@ -16,7 +16,7 @@ urlpatterns = [
          views.UserView.as_view(),
          name = 'user_list'),
      path('mood-dital/<int:pk>',
-          views.DetailView.as_view(),
+          views.MoodDetailView.as_view(),
           name = 'mood_detail'),
      path('mypage/', views.MypageView.as_view(), name = 'mypage'),
      path('mood/<int:pk>/delete/',
