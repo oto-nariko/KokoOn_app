@@ -46,16 +46,20 @@
                 <strong>{{ comment.user.username }}</strong>
                 <small class="text-muted">({{comment.posted_at}})</small> 
               </p>
+                <p style="color: red;">抽出ID: {{ comment.youtube_id }}</p>
               
               <p>{{ comment.clean_text }}</p>
 
               {% if comment.has_youtube %}
-              <div class="youtube-preview" data-video-id="{{ comment.youtube_id }}">
-                <img src="https://img.youtube.com/vi/{{ comment.youtube_id }}/hqdefault.jpg"
-                      alt="YouTube Thumbnail"
-                      class="youtube-thumbnail"
-                      onclick="showPlayer('{{ comment.youtube_id }}', this)">
-                <div class="play-overlay">▶</div>
+              <div class="youtube-preview">
+                <a href="https://www.youtube.com/watch?v={{ comment.youtube_id }}" 
+                   target="_blank" 
+                   rel="noopener noreferrer">
+                    
+                    <img src="https://img.youtube.com/vi/{{ comment.youtube_id }}/0.jpg"
+                          alt="YouTube Thumbnail"
+                          class="youtube-thumbnail">
+                </a>
               </div>
               {% endif %}
               </div>
@@ -66,33 +70,6 @@
           </div>
         </div>
 
-        <script>
-        /**
-         * サムネイルをクリックした際にYouTubeプレイヤーに切り替える関数
-         * @param {string} videoId - YouTubeの動画ID
-         * @param {HTMLElement} clickedElement - クリックされたimg要素
-         */
-        function showPlayer(videoId, clickedElement) {
-            // 現在クリックされたサムネイルの親要素 (.youtube-preview) を見つける
-            const previewDiv = clickedElement.closest('.youtube-preview');
-            if (!previewDiv) return;
-            
-            // サムネイルと再生アイコンを非表示にする
-            clickedElement.style.display = 'none';
-            previewDiv.querySelector('.play-overlay').style.display = 'none';
-        
-            // iframe (埋め込みプレイヤー) を作成して追加
-            const iframe = document.createElement('iframe');
-            iframe.width = "100%";
-            iframe.height = "315";
-            // autoplay=1 を付けて、クリック後すぐに再生されるようにする
-            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-            iframe.frameBorder = "0";
-            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-            iframe.allowFullscreen = true;
-            
-            previewDiv.appendChild(iframe);
-        }
-        </script>
+
         </div>
     {% endblock %}

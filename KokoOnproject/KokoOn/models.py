@@ -71,7 +71,7 @@ class Comment(models.Model):
 # YouTube URLの正規表現
     # 例: https://www.youtube.com/watch?v=xxxxxxxxxxx や https://youtu.be/xxxxxxxxxxx に対応
     YOUTUBE_RE = re.compile(
-        r'(?:https?://)?(?:www\.)?(?:youtube\.com/watch\?v=|youtu\.be/)([^& \n]+)'
+        r'(?:youtu\.be\/|v=)([a-zA-Z0-9_-]{11})'
     )
 
     def save(self, *args, **kwargs):
