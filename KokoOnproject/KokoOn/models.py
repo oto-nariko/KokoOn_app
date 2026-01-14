@@ -46,7 +46,7 @@ class MoodPost(models.Model):
         return self.title
     
 class Comment(models.Model):
-    user = models.ForeignKey(
+    comment_user = models.ForeignKey(
         CustomUser,
         verbose_name='ユーザー',
         on_delete=models.CASCADE
@@ -94,4 +94,4 @@ class Comment(models.Model):
         return self.youtube_id is not None and self.youtube_id != ''
     
     def __str__(self):
-        return f'{self.user.username} - {self.mood.title[:10]}...'
+        return f'{self.comment_user.username} - {self.mood.title[:10]}...'

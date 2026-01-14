@@ -106,8 +106,8 @@ class MoodDetailView(DetailView):
             # フォームのインスタンスをまだ保存しない（commit=False）
             comment = comment_form.save(commit=False)
             
-            # 必須項目（userとmood）を手動でセットする
-            comment.user = request.user # ログイン中のユーザー
+            # 必須項目（comment_userとmood）を手動でセットする
+            comment.comment_user = request.user # ログイン中のユーザー
             comment.mood = self.object  # 現在の投稿
             
             # save()を実行すると、models.pyで定義した youtube_id 抽出ロジックが実行されます
@@ -120,3 +120,11 @@ class MoodDetailView(DetailView):
         context = self.get_context_data(**kwargs)
         context['comment_form'] = comment_form # エラー情報を持ったフォーム
         return self.render_to_response(context)
+    
+class CommentDeleteView(DeleteView):
+    model = Comment
+    template_name = 'comment_delete.html'
+    success_url = reverse_lazy('KokoOn:mypage')
+
+    def delete(self, request, *args, **kwargs):
+        return super().delete(request, *args, **kwargs)

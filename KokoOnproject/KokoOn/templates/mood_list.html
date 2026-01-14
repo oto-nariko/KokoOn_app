@@ -1,40 +1,14 @@
+{% load static %}
+
   <div class="album py-5 bg-light">
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for record in object_list %}
         <div class="col">
           <div class="card shadow-sm">
-            
-            {% comment %} <div class="card-body">
-              <p class="card-text">
-                {{record.title}}
-              </p>
-              <p>
-                {{record.comment}}
-              </p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <!--詳細ページを表示するボタン-->
-                  <button type="button"
-                          class="btn btn-sm btn-outline-secondary"
-                          onclick="location.href='{% url 'KokoOn:mood_detail' record.pk %}'">
-                          View</button>
-                  <!--カテゴリを表示するボタン-->
-                  <button type="button"
-                          class="btn btn-sm btn-outline-secondary"
-                          onclick="location.href='{% url 'KokoOn:mood_cat' category=record.category.id %}'">
-                          {{record.category.title}}</button>
-                </div>
-                <!--投稿したユーザー名を出力-->
-                <a href="{% url 'KokoOn:user_list' user=record.user.id %}">
-                <small class="text-muted">
-                  {{record.user.username}}</small>
-                </a>
-              </div>
-              </div> {% endcomment %}
               
             <div class="user-header">
-                <img src="https://via.placeholder.com/40" alt="Avatar" class="post-avatar me-2">
+                <img src="{% static 'img/KokoOn_account.png' %}" alt="Avatar" class="post-avatar me-2">
                 <div class="user-details">
                     <a href="{% url 'KokoOn:user_list' user=record.user.id %}" class="username-link">
                         <strong>{{record.user.username}}</strong>

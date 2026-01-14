@@ -22,4 +22,7 @@ urlpatterns = [
      path('mood/<int:pk>/delete/',
           views.MoodDeleteView.as_view(),
           name = 'mood_delete'),
+     path('comment/<int:pk>/delete',
+          views.CommentDeleteView.as_view(),
+          name = 'comment_delete'),
 ]

@@ -46,7 +46,7 @@
                 <strong>{{ comment.user.username }}</strong>
                 <small class="text-muted">({{comment.posted_at}})</small> 
               </p>
-                <p style="color: red;">抽出ID: {{ comment.youtube_id }}</p>
+
               
               <p>{{ comment.clean_text }}</p>
 
@@ -61,6 +61,12 @@
                           class="youtube-thumbnail">
                 </a>
               </div>
+              {% endif %}
+
+              {% if request.user == comment.comment_user %}
+              <form method="POST">
+              <a href="{% url 'KokoOn:comment_delete' comment.pk %}"
+                class="btn btn-primary my-2">消去する</a>
               {% endif %}
               </div>
             {% empty %}

@@ -11,11 +11,11 @@ class MoodPostAdmin(admin.ModelAdmin):
 
 class CommentAdmin(admin.ModelAdmin):
     # 管理画面の一覧画面で表示するフィールド
-    list_display = ('user', 'mood', 'text', 'youtube_id', 'posted_at')
+    list_display = ('comment_user', 'mood', 'text', 'youtube_id', 'posted_at')
     
     # 管理画面の編集フォームで編集可能にするフィールド
     # ここに 'youtube_id' を追加して、手動で確認・編集できるようにします。
-    fields = ('user', 'mood', 'text', 'youtube_id') 
+    fields = ('comment_user', 'mood', 'text', 'youtube_id') 
     
     # 検索可能なフィールド
     search_fields = ('user__username', 'text', 'youtube_id')
