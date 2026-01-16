@@ -1,41 +1,27 @@
 {% load static %}
 
-  <div class="album py-5 bg-light">
+<div id="production">
     <div class="container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for record in object_list %}
-        <div class="col">
-          <div class="card shadow-sm">
-              
-            <div class="user-header">
-                <img src="{% static 'img/KokoOn_account.png' %}" alt="Avatar" class="post-avatar me-2">
-                <div class="user-details">
-                    <a href="{% url 'KokoOn:user_list' user=record.user.id %}" class="username-link">
-                        <strong>{{record.user.username}}</strong>
-                    </a>
-                    <small class="text-muted d-block">{{ record.category.title }}</small>
-                </div>
+        <article class="post-item">
+            <h3>{{ record.title }}</h3>
+            
+            <div class="post-meta">
+                <p>
+                    <strong>{{ record.user.username }}</strong> 
+                    <span class="category-badge">{{ record.category.title }}</span>
+                </p>
             </div>
 
-            <div class="card-body post-content-area">
-                <h5 class="card-title">{{record.title}}</h5>
-                <p class="card-text">
-                    {{record.comment|truncatechars:100}} </p>
+            <div class="post-body">
+                <p>{{ record.comment|truncatechars:100 }}</p>
             </div>
 
-            <div class="card-footer post-actions">
-                <div class="d-flex justify-content-between align-items-center">
-                    <button type="button"
-                            class="btn btn-sm btn-primary"
-                            onclick="location.href='{% url 'KokoOn:mood_detail' record.pk %}'">
-                            詳細を見る</button>
-                    <span class="badge bg-secondary">{{record.category.title}}</span>
-                </div>
+            <div class="post-footer">
+                <a href="{% url 'KokoOn:mood_detail' record.pk %}" class="detail-link">詳細を見る</a>
+                <p class="post-date">{{ record.posted_at|date:"Y/m/d" }}</p>
             </div>
-
-          </div>
-        </div>
+        </article>
         {% endfor %}
-      </div>
     </div>
-  </div>
+</div>
