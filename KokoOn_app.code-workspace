@@ -5,6 +5,12 @@
 		},
 		{
 			"path": "../photoproject"
+		},
+		{
+			"path": "../work/KokoOntmp"
+		},
+		{
+			"path": "../work/homework_myprofile"
 		}
 	],
 	"settings": {}
